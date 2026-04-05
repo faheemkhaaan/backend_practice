@@ -1,0 +1,16 @@
+       013   11    0B    VT  '\v' (vertical tab)     113   75    4B    K
+       014   12    0C    FF  '\f' (form feed)        114   76    4C    L
+       015   13    0D    CR  '\r' (carriage ret)     115   77    4D    M
+       016   14    0E    SO  (shift out)             116   78    4E    N
+       017   15    0F    SI  (shift in)              117   79    4F    O
+       020   16    10    DLE (data link escape)      120   80    50    P
+       021   17    11    DC1 (device control 1)      121   81    51    Q
+       022   18    12    DC2 (device control 2)      122   82    52    R
+       023   19    13    DC3 (device control 3)      123   83    53    S
+       024   20    14    DC4 (device control 4)      124   84    54    T
+       025   21    15    NAK (negative ack.)         125   85    55    U
+       026   22    16    SYN (synchronous idle)      126   86    56    V
+       027   23    17    ETB (end of trans. blk)     127   87    57    W
+       030   24    18    CAN (cancel)                130   88    58    X
+       031   25    19    EM  (end of medium)         131   89    59    Y
+       032   26    1A    SUB (substitute)            132   90    5A    Z
