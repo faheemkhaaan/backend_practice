@@ -1,0 +1,3 @@
+Learned about how to redirect the stardard ouput or standard error to a file
+Appending to text.txt.
+Appending to text.txt.

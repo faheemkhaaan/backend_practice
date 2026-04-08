@@ -1,0 +1,1 @@
+Learned about output redirection. And chaining processes
