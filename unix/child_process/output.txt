@@ -1,0 +1,9 @@
+This is some text that i want to write
+Got this data from standard in:  this is greate
+
+Got this data from standard in:  how 
+
+Got this data from standard in:  is 
+
+Got this data from standard in:  this working
+
