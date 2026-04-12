@@ -33,6 +33,8 @@ module.exports = (server) => {
   server.route("post", "/api/upload-video", Video.uploadVideos);
 
 
+  server.route("patch", "/api/video/extract-audio", Video.extractAudio);
+
   // Get video assets
 
   server.route("get", "/get-video-asset", Video.getVideoAsset);
