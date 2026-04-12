@@ -38,13 +38,13 @@ const getDimensions = (fullPath) => {
 
         ffprobe.stdout.on('data', (data) => {
             const output = data.toString().trim();
-            const [width, heigth] = output.split(",");
+            const [width, height] = output.split(",");
             console.log(`############ WIDTH and HEIGHT ##############`);
-            console.log(width, heigth);
+            console.log(width, height);
             console.log(`############ WIDTH and HEIGHT ##############`);
             resolve({
                 width: Number(width),
-                heigth: Number(heigth)
+                heigth: Number(height)
             })
         });
 

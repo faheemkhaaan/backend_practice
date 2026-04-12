@@ -1,12 +1,12 @@
 [
     {
         "id": 0,
-        "vidoeId": "bb89f16c",
+        "videoId": "afbf15d4",
         "name": "uni-video",
         "extension": "mp4",
         "dimensions": {
             "width": 1920,
-            "heigth": 1080
+            "height": 1080
         },
         "userId": 1,
         "extractedAudio": false,
