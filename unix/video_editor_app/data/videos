@@ -1,1 +1,1 @@
-[{"id":0,"videoId":"afbf15d4","name":"uni-video","extension":"mp4","dimensions":{"width":1920,"height":1080},"userId":1,"extractedAudio":true,"resizes":{"90x80":{"processing":false}}}]
+[{"id":0,"videoId":"23c3d6d9","name":"uni-video","extension":"mp4","dimensions":{"width":1920,"heigth":1080},"userId":1,"extractedAudio":false,"resizes":{"600x600":{"processing":false},"700x700":{"processing":false},"400x400":{"processing":false}}}]

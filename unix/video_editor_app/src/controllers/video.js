@@ -5,7 +5,10 @@ const fs = require('node:fs/promises')
 const { pipeline } = require("node:stream/promises");
 const util = require("../../lib/utils");
 const DB = require('../DB');
-const FF = require("../../lib/FF")
+const FF = require("../../lib/FF");
+const JobQueue = require("../../lib/JobQueue");
+
+const jobs = new JobQueue();
 
 const getVideos = (req, res, handleErr) => {
     DB.update()
@@ -123,31 +126,20 @@ const resizeVideo = async (req, res, handleErr) => {
 
     video.resizes[`${width}x${height}`] = { processing: true };
 
-    const originalVideoPath = `./storage/${video.videoId}/original.${video.extension}`;
-    const targetVideoPath = `./storage/${video.videoId}/${width}x${height}.${video.extension}`;
+    DB.save()
 
-    try {
+    jobs.enqueue({
+        type: "resize",
+        videoId,
+        width,
+        height
+    })
 
+    res.status(200).json({
+        status: "success",
+        message: "The video is now being processed!"
+    });
 
-        await FF.resize(
-            originalVideoPath,
-            targetVideoPath,
-            width,
-            height
-        );
-
-        video.resizes[`${width}x${height}`].processing = false;
-
-
-        DB.save()
-        res.status(200).json({
-            status: "success",
-            message: "The video is now being processed!"
-        });
-    } catch (error) {
-        util.deleteFile(targetVideoPath);
-        return handleErr(error);
-    }
 }
 
 
