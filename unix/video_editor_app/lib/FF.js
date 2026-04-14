@@ -26,7 +26,7 @@ const makeThumbnail = (fullPath, thumbnailPath) => {
         ffmpeg.on("error", err => {
             reject(err);
         })
-    })
+    });
 }
 
 const getDimensions = (fullPath) => {
@@ -90,8 +90,13 @@ const resize = (originalVideoPath, targetVideoPath, width, height) => {
             `scale=${width}:${height}`,
             '-c:a',
             'copy',
+            '-y',
             targetVideoPath
         ]);
+
+        ffmpeg.stderr.on("data", (data) => {
+            console.log(data);
+        })
 
         ffmpeg.on("close", (code) => {
             if (code === 0) {

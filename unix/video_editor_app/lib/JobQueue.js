@@ -7,6 +7,21 @@ class JobQueue {
     constructor() {
         this.jobs = [];
         this.currentJob = null;
+
+        DB.update();
+        DB.videos.forEach(video => {
+            Object.entries(video.resizes).map(([key, value]) => {
+                if (value.processing) {
+                    this.enqueue({
+                        videoId: video.videoId,
+                        type: "resize",
+                        width: Number(key.split("x")[0]),
+                        height: Number(key.split("x")[1])
+                    })
+                }
+            })
+        });
+        console.log(this.jobs);
     }
 
 
@@ -29,6 +44,7 @@ class JobQueue {
     }
     async execute(job) {
         if (job.type === "resize") {
+            console.log("Started resizing")
             DB.update();
             const video = DB.videos.find(video => video.videoId === job.videoId);
 
