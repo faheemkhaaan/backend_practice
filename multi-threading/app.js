@@ -28,4 +28,28 @@ port2.on("message", (msg) => {
 
 */
 
-/* Communication between 2 worker threads */
+/*Example 3 Communication between 2 worker threads 
+
+const { port1, port2 } = new MessageChannel();
+
+const thread1 = new Worker("./calc.js", { workerData: { port: port1 }, transferList: [port1] });
+const thread2 = new Worker("./calc.js", { workerData: { port: port2 }, transferList: [port2] });
+
+*/
+
+/* Communication bewteen main thread and 2 worker threads */
+
+const channel1 = new MessageChannel();
+const channel2 = new MessageChannel();
+
+const thread1 = new Worker("./calc.js", {
+    workerData: { port: channel1.port2 },
+    transferList: [channel1.port2]
+});
+const tread2 = new Worker("./calc.js", {
+    workerData: [channel2.port2],
+    transferList: [channel2.port2]
+});
+
+channel1.port1.postMessage("Hello from the main tread")
+channel2.port1.postMessage("Hello from the main tread")
