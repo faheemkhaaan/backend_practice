@@ -1,10 +1,4 @@
+const { workerData } = require("worker_threads");
 
 
-const a = 1000;
-
-console.log(a)
-
-
-setInterval(() => {
-
-}, 50);
+console.log(workerData)
