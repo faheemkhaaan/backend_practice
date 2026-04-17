@@ -1,5 +1,8 @@
 // Controllers
 const User = require("./controllers/user");
+const generatePrimes = require("../lib/prime-generator");
+const { performance } = require("perf_hooks");
+const { Worker } = require("worker_threads");
 
 module.exports = (server) => {
   // ------------------------------------------------ //
@@ -23,9 +26,29 @@ module.exports = (server) => {
   // ------------------------------------------------ //
 
   server.route("get", "/api/primes", (req, res) => {
-    res.json({
-      primes: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29],
-      time: 0.21,
+    const count = req.params.get("count");
+    let startingNumber = BigInt(req.params.get('start'));
+
+    if (startingNumber < BigInt(Number.MAX_SAFE_INTEGER)) {
+      startingNumber = Number(startingNumber);
+    }
+    const start = performance.now();
+    const thread1 = new Worker('./lib/calc.js', { workerData: { count, start: startingNumber } });
+    let result = []
+    thread1.on("message", (prims) => {
+      result = result.concat(prims);
     });
+
+    thread1.on('exit', (code) => {
+      if (code === 0) {
+        const end = ((performance.now() - start) / 1000).toFixed(2);
+        res.json({
+          primes: result,
+          time: end,
+        });
+
+      }
+    })
+
   });
 };
