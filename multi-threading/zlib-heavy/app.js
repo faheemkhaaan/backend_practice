@@ -4,6 +4,9 @@ const { performance } = require("perf_hooks");
 const THREADS = 1;
 let completed = 0;
 const count = 100_000;
+process.env.UV_THREADPOOL_SIZE = 2;
+
+console.log("Thread pool count", process.env.UV_THREADPOOL_SIZE)
 
 for (let i = 0; i < THREADS; i++) {
   const start = performance.now();
@@ -15,7 +18,7 @@ for (let i = 0; i < THREADS; i++) {
   const threadId = worker.threadId;
   console.log(`Worker ${threadId} started.`);
 
-  worker.on("message", (msg) => {});
+  worker.on("message", (msg) => { });
 
   worker.on("error", (err) => {
     console.error(err);
