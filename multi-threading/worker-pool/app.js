@@ -12,21 +12,38 @@ const totalTasks = 2_000_000_000;
 const start = performance.now();
 for (let i = 0; i < totalTasks; i++) {
 
-    pool.submit("generatePrimes", {
-        count: 20,
-        start: 10_000_000_000 + i * 500,
-        format: true,
-        log: false
-    }, (primes) => {
-        // console.log("Primes generated:");
-        console.log(performance.eventLoopUtilization());
-        tasksDone++;
-        // result = result.concat(primes)
+    if (i % 5 === 0) {
+        pool.submit("generatePrimes", {
+            count: 20,
+            start: 10_000_000_000 + i * 500,
+            format: true,
+            log: false
+        }, (primes) => {
+            // console.log("Primes generated:");
+            console.log(performance.eventLoopUtilization());
+            tasksDone++;
+            // result = result.concat(primes)
 
-        if (tasksDone === totalTasks) {
-            console.log(`Time taken: ${performance.now() - start}ms`);
-            console.log(result.sort());
-        }
-    });
+            if (tasksDone === totalTasks) {
+                console.log(`Time taken: ${performance.now() - start}ms`);
+                console.log(result.sort());
+            }
+        });
+
+    } else {
+        pool.submit("factorial", {
+            n: BigInt(i),
+        }, (result) => {
+
+            tasksDone++;
+            // result = result.concat(primes)
+
+            if (tasksDone === totalTasks) {
+                console.log(`Time taken: ${performance.now() - start}ms`);
+                console.log(result.sort());
+            }
+        })
+    }
+
 
 }

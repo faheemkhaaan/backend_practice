@@ -5,6 +5,13 @@ const { performance } = require("perf_hooks");
 const { Worker } = require("worker_threads");
 
 module.exports = (server) => {
+
+
+  server.route("get", "/api/get-json-data", (req, res) => {
+    res.json({ data: "This is a big size json data".repeat(100) });
+  })
+
+
   // ------------------------------------------------ //
   // ************ USER ROUTES ************* //
   // ------------------------------------------------ //

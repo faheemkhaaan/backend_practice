@@ -1,6 +1,7 @@
 
 const { parentPort } = require("worker_threads");
 const generatePrimes = require("./prime-generator");
+const calculateFactorial = require("./factorial");
 
 
 parentPort.on('message', ({ taskName, options }) => {
@@ -12,6 +13,10 @@ parentPort.on('message', ({ taskName, options }) => {
             });
 
             parentPort.postMessage(primes);
+            break;
+        case "factorial":
+            const result = calculateFactorial(options.n);
+            parentPort.postMessage(result);
             break;
         default:
             parentPort.postMessage('Unkown task');
