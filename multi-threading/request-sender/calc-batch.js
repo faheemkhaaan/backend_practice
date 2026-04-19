@@ -5,13 +5,15 @@ const sendRequest = require("./sendRequest");
 async function sendBatchRequests(count) {
   const requestPromises = [];
 
+
   for (let i = 0; i < count; i++) {
     requestPromises.push(
       sendRequest(
         workerData.hostname,
         workerData.port,
         workerData.path,
-        workerData.method
+        workerData.method,
+        workerData.body
       )
     );
   }

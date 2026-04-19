@@ -5,20 +5,39 @@ process.title = "node-rs";
 
 // 1 minute to handle 5 million requests
 
-const THREADS = 4;
-const count = 100_000;
+const THREADS = 1;
+const count = 20_000;
 let completed = 0;
 
 for (let i = 0; i < THREADS; i++) {
   const start = performance.now();
 
-  const worker = new Worker("./calc.js", {
+  const worker = new Worker("./calc-batch.js", {
     workerData: {
       count: count / THREADS,
       hostname: "localhost",
-      port: 8090,
-      path: "/api/get-json-data",
-      method: "GET",
+      port: 3000,
+      path: "/api/v1/tasks",
+      method: "POST",
+      body: {
+        "userId": "3fcd04b7-b2de-4d5a-921d-2a2f848defd5",
+        "title": "string",
+        "description": "string",
+        "status": "available",
+        "category": "string",
+        "userIntegrationId": "string",
+        "contactId": "string",
+        "sourceType": "string",
+        "priorityScore": 0,
+        "priorityBand": "low",
+        "aiConfidence": 0,
+        "urgencyKeywordsDetected": true,
+        "isManual": true,
+        "deepLinkUrl": "https://www.udemy.com/course/understanding-nodejs-core-concepts/learn/lecture/45393091#overview",
+        "notes": "string",
+        "snoozedUntil": "2026-04-19T06:15:36.497Z",
+        "dueDate": "2026-04-19T06:15:36.497Z"
+      }
     },
   });
 

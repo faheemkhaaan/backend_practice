@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/multi-threading/worker-pool/app.js"
+            "program": "${workspaceFolder}/multi-threading/request-sender/app.js"
         }
     ]
 }

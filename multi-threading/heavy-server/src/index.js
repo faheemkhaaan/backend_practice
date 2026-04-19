@@ -4,6 +4,8 @@ const apiRouter = require("./router.js");
 
 const PORT = 8090;
 
+process.title = 'Heavy_Server'
+
 const server = new cpeak();
 
 // ------ Middlewares ------ //
