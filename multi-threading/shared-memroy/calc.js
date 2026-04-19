@@ -1,7 +1,7 @@
 
 const { workerData, threadId } = require('worker_threads');
 
-const data = Buffer.from(workerData.data);
+const data = new Uint8Array(workerData.data);
 const data2 = Buffer.from(workerData.data2);
 
 
