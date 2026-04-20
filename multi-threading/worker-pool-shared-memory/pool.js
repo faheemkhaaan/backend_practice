@@ -3,12 +3,15 @@ const { Worker } = require("worker_threads");
 const path = require("path");
 
 class Pool {
-    constructor(threadCount) {
+    constructor(threadCount, totalItemsCount) {
         this.threadCount = threadCount; // number of threads that will be spawned
         this.threads = []; // all of our worker threads (same length as threadCount)
         this.idleThreads = [] // threads that are not currently working
         this.scheduledTasks = []; // queue of tasks that need to be executed - these are not curently running in on of the threads
 
+        this.primes = new SharedArrayBuffer((totalItemsCount * 64) / 8)
+
+        this.primesSeal = new SharedArrayBuffer(4);
 
         for (let i = 0; i < threadCount; i++) {
             this.spawnThread();
@@ -16,7 +19,12 @@ class Pool {
 
     }
     spawnThread() {
-        const worker = new Worker(path.join(__dirname, "./calc.js"));
+        const worker = new Worker(path.join(__dirname, "./calc.js"), {
+            workerData: {
+                primes: this.primes,
+                primesSeal: this.primesSeal
+            }
+        });
 
         // when we get a message from a worker, it means that it has finished its task
         worker.on("message", (result) => {
@@ -51,6 +59,10 @@ class Pool {
             callback
         });
         this.runNextTask();
+    }
+
+    getPrimes() {
+        return Array.from(new BigUint64Array(this.primes)).sort()
     }
 
 }
