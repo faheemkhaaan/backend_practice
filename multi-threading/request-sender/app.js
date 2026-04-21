@@ -32,7 +32,6 @@ for (let i = 0; i < THREADS; i++) {
         "priorityBand": "low",
         "aiConfidence": 0,
         "urgencyKeywordsDetected": true,
-        "isManual": true,
         "deepLinkUrl": "https://www.udemy.com/course/understanding-nodejs-core-concepts/learn/lecture/45393091#overview",
         "notes": "string",
         "snoozedUntil": "2026-04-19T06:15:36.497Z",

@@ -1,0 +1,13 @@
+{
+  "name": "event-loop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "exp1.js",
+  "scripts": {
+    "start": "node exp1.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
